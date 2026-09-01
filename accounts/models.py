@@ -4,21 +4,21 @@ from django.contrib.auth.models import AbstractBaseUser , BaseUserManager
 
 
 class MyAccountManager(BaseUserManager):
-    def create_user (self,username,first_name,last_name,email,password=None):
+    def create_user(self, username, first_name, last_name, email, password=None):
         if not email:
-            raise ValueError('EMAIL IS REQUIRED ')
-
+            raise ValueError('EMAIL IS REQUIRED')
         if not username:
-            raise ValueError('username IS REQUIRED ')
+            raise ValueError('username IS REQUIRED')
 
         user = self.model(
-            email = self.normalize_email(email),
+            email=self.normalize_email(email),
             username=username,
             first_name=first_name,
             last_name=last_name,
         )
 
         user.set_password(password)
+        user.is_active = True  # <--- YEH ZAROORI HAI (Iske bina user authenticate nahi hoga)
         user.save(using=self._db)
         return user
 
