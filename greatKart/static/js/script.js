@@ -2,7 +2,7 @@
 
 // jquery ready start
 $(document).ready(function() {
-	// jQuery code
+    // jQuery code
 
 
     /* ///////////////////////////////////////
@@ -13,7 +13,7 @@ $(document).ready(function() {
     */ ///////////////////////////////////////
     
 
-	//////////////////////// Prevent closing from click inside dropdown
+    //////////////////////// Prevent closing from click inside dropdown
     $(document).on('click', '.dropdown-menu', function (e) {
       e.stopPropagation();
     });
@@ -45,16 +45,17 @@ $(document).ready(function() {
     });
 
 
-
-	//////////////////////// Bootstrap tooltip
-	if($('[data-toggle="tooltip"]').length>0) {  // check if element exists
-		$('[data-toggle="tooltip"]').tooltip()
-	} // end if
-
+    //////////////////////// Bootstrap tooltip
+    if($('[data-toggle="tooltip"]').length>0) {  // check if element exists
+        $('[data-toggle="tooltip"]').tooltip()
+    } // end if
 
 
+    //////////////////////// Auto-hide Alert Messages after 4 seconds
+    setTimeout(function() {
+        $('#message').fadeOut('slow');
+    }, 4000);
 
     
 }); 
 // jquery end
-
