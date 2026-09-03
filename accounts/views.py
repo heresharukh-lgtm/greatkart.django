@@ -6,7 +6,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import EmailMessage
-
+from django.contrib.auth.decorators import login_required
 from .forms import RegistrationForm
 from .models import Account
 
@@ -68,7 +68,7 @@ def login(request):
         if user is not None:
             auth.login(request, user)
             messages.success(request, 'You are now logged in.')
-            return redirect('home')
+            return redirect('dashboard')
         else:
             messages.error(request, 'Invalid login credentials')
             return redirect('login')
@@ -95,3 +95,10 @@ def activate(request, uidb64, token):
     else:
         messages.error(request, 'Invalid activation link!')
         return redirect('register')
+
+@login_required(login_url = 'login')
+def dashboard(request):
+    return render(request,'accounts/dashboard.html')    
+
+def forgotPassword(request):
+    return render(request,'accounts/forgotPassword.html')
